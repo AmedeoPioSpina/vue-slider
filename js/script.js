@@ -31,20 +31,47 @@ const { createApp } = Vue
       return {
         slideTarget: slides,
         sliderIndex: 0
+        
       }
     },
     methods: {
         nextSlideFunc() {
             if(this.slideTarget.length === this.sliderIndex + 1){
-                return this.sliderIndex = 0;
+                const activeSlider = document.querySelector("div.thumb.active");
+                const slidersList = document.querySelectorAll("div.thumb");
+                activeSlider.classList.remove("active");
+                this.sliderIndex = 0;
+                slidersList[this.sliderIndex].classList.add("active");
             }
-            return this.sliderIndex += 1;
+            else {
+                const activeSlider = document.querySelector("div.thumb.active");
+                const slidersList = document.querySelectorAll("div.thumb");
+                activeSlider.classList.remove("active");
+                this.sliderIndex += 1;
+                slidersList[this.sliderIndex].classList.add("active");
+            }
         },
         prevSlideFunc() {
             if(-1 === this.sliderIndex - 1){
-                return this.sliderIndex = this.slideTarget.length - 1;
+                const activeSlider = document.querySelector("div.thumb.active");
+                const slidersList = document.querySelectorAll("div.thumb");
+                activeSlider.classList.remove("active");
+                this.sliderIndex = this.slideTarget.length - 1;
+                slidersList[this.sliderIndex].classList.add("active");
             }
-            return this.sliderIndex -= 1;
+            else {
+                const activeSlider = document.querySelector("div.thumb.active");
+                const slidersList = document.querySelectorAll("div.thumb");
+                activeSlider.classList.remove("active");
+                this.sliderIndex -= 1;
+                slidersList[this.sliderIndex].classList.add("active");
+            }
+        },
+        clickedSlideFunc(event, index) {
+            const activeSlider = document.querySelector("div.thumb.active");
+            activeSlider.classList.remove("active");
+            event.target.closest(".thumb").classList.add("active");
+            return this.sliderIndex = index;
         }
     }
   }).mount('#app')
