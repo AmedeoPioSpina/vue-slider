@@ -23,3 +23,28 @@ const slides = [
 ];
 
 console.log(slides);
+
+const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        slideTarget: slides,
+        sliderIndex: 0
+      }
+    },
+    methods: {
+        nextSlideFunc() {
+            if(this.slideTarget.length === this.sliderIndex + 1){
+                return this.sliderIndex = 0;
+            }
+            return this.sliderIndex += 1;
+        },
+        prevSlideFunc() {
+            if(-1 === this.sliderIndex - 1){
+                return this.sliderIndex = this.slideTarget.length - 1;
+            }
+            return this.sliderIndex -= 1;
+        }
+    }
+  }).mount('#app')
